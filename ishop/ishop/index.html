@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Shop</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+    <script src="ProductsList.js"></script>
+
+    <script>
+      const productsArray = [
+        {
+          id: 012,
+          name: "Product1",
+          price: "200$",
+          src: "https://placeimg.com/640/480/nature",
+          count: 5
+        },
+        {
+          id: 345,
+          name: "Product2",
+          price: "100$",
+          src: "https://placeimg.com/640/480/animals",
+          count: 2
+        },
+        {
+          id: 678,
+          name: "Product3",
+          price: "300$",
+          src: "https://placeimg.com/640/480/tech",
+          count: 3
+        },
+        {
+          id: 901,
+          name: "Product4",
+          price: "500$",
+          src: "https://placeimg.com/640/480/arch",
+          count: 56
+        }
+      ];
+
+      ReactDOM.render(
+        React.createElement(ProductsList, {
+          products: productsArray,
+          shopName: "My New Shop"
+        }),
+        document.getElementById("container")
+      );
+    </script>
+  </body>
+</html>
