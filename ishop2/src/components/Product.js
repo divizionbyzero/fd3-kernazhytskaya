@@ -33,9 +33,9 @@ Product.propTypes = {
     src: PropTypes.string.isRequired,
     count: PropTypes.string.isRequired
   }),
-  selectedId: PropTypes.string,
-  clickHandler: PropTypes.func,
-  delHandler: PropTypes.func
+  clickHandler: PropTypes.func.isRequired,
+  delHandler: PropTypes.func.isRequired,
+  selectedId: PropTypes.string.isRequired
 }
 
 export default Product;
