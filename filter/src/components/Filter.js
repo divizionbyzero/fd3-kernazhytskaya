@@ -7,7 +7,8 @@ class Filter extends React.Component {
     super(props);
     this.state = {
         searchText: '',
-        shouldBeSorted: false
+        shouldBeSorted: false,
+        array: this.props.strings.slice(0)
     };
   }
 
@@ -23,7 +24,7 @@ class Filter extends React.Component {
   }
 
   sortArray = (arr) => {
-    let arrCopied = arr.slice();
+    const arrCopied = arr.slice(0);
     arrCopied.sort(function(a, b) {
       var textA = a.text.toLowerCase();
       var textB = b.text.toLowerCase();
@@ -33,8 +34,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { strings } = this.props;
-    const { shouldBeSorted, searchText } = this.state;
+    const { shouldBeSorted, searchText, array } = this.state;
 
     return (
       <div>
@@ -45,11 +45,11 @@ class Filter extends React.Component {
         </div>
         <div className="list">
           {shouldBeSorted ?
-          this.sortArray(strings).map(item => {
+          this.sortArray(array).map(item => {
             if (item.text.search(searchText) > -1) return <div key={item.code}>{item.text}</div>; return '';
           })
           : 
-          strings.map(item => {
+          array.map(item => {
             if (item.text.search(searchText) > -1) return <div key={item.code}>{item.text}</div>; return '';
           })}
         </div>
