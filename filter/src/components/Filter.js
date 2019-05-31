@@ -23,14 +23,12 @@ class Filter extends React.Component {
   }
 
   sortArray = (arr) => {
-    let arrCopied = arr;
+    let arrCopied = arr.slice();
     arrCopied.sort(function(a, b) {
       var textA = a.text.toLowerCase();
       var textB = b.text.toLowerCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
   });
-  console.log(arr);
-  console.log(arrCopied);
   return arrCopied;
   }
 
