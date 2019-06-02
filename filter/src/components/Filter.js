@@ -16,7 +16,7 @@ class Filter extends React.Component {
     this.setState({searchText: event.target.value});
   }
   resetInput = () => {
-    this.setState({searchText: ''});
+    this.setState({searchText: '', shouldBeSorted: false});
   }
 
   toggleSort = () => {
@@ -39,7 +39,7 @@ class Filter extends React.Component {
     return (
       <div>
         <div className="top-line">
-          <input type="checkbox" onClick={this.toggleSort}/>
+          <input type="checkbox" checked={shouldBeSorted} onClick={this.toggleSort}/>
           <input type="text" value= {searchText} onChange={this.inputHandler}/>
           <button onClick={this.resetInput}>Reset</button>
         </div>
