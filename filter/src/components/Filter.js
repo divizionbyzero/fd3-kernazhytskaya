@@ -8,19 +8,26 @@ class Filter extends React.Component {
     this.state = {
         searchText: '',
         shouldBeSorted: false,
-        array: this.props.strings.slice(0)
+        processedStrings: this.props.strings
     };
   }
 
   inputHandler = (event) => {
-    this.setState({searchText: event.target.value});
+    this.setState({searchText: event.target.value}, this.processStrings);
   }
   resetInput = () => {
     this.setState({searchText: '', shouldBeSorted: false});
   }
 
-  toggleSort = () => {
-    this.setState({shouldBeSorted: !this.state.shouldBeSorted});
+  toggleSort = (event) => {
+    this.setState({shouldBeSorted: event.target.checked}, this.processStrings);
+  }
+
+  processStrings = () => {
+    let res = this.props.strings.slice();
+    if (this.state.searchText) res.filter(s => s.text.indexOf(this.state.searchText) !== -1);
+    if (this.state.shouldBeSorted) {res = this.sortArray(res);}
+    this.setState({processedStrings: res});
   }
 
   sortArray = (arr) => {
@@ -34,7 +41,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { shouldBeSorted, searchText, array } = this.state;
+    const { shouldBeSorted, searchText, processedStrings } = this.state;
 
     return (
       <div>
@@ -44,12 +51,7 @@ class Filter extends React.Component {
           <button onClick={this.resetInput}>Reset</button>
         </div>
         <div className="list">
-          {shouldBeSorted ?
-          this.sortArray(array).map(item => {
-            if (item.text.search(searchText) > -1) return <div key={item.code}>{item.text}</div>; return '';
-          })
-          : 
-          array.map(item => {
+          {processedStrings.map(item => {
             if (item.text.search(searchText) > -1) return <div key={item.code}>{item.text}</div>; return '';
           })}
         </div>
