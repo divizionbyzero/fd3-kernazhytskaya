@@ -46,7 +46,7 @@ class Filter extends React.Component {
     return (
       <div>
         <div className="top-line">
-          <input type="checkbox" checked={shouldBeSorted} onClick={this.toggleSort}/>
+          <input type="checkbox" checked={shouldBeSorted} onChange={this.toggleSort}/>
           <input type="text" value= {searchText} onChange={this.inputHandler}/>
           <button onClick={this.resetInput}>Reset</button>
         </div>
