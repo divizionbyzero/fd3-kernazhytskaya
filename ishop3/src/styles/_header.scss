@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    &-title {
+        font-size: 32px;
+        font-weight: bold;
+    }
+    &-button {
+        cursor: pointer;
+        &[disabled] {
+            cursor: crosshair;
+        }
+    }
+}

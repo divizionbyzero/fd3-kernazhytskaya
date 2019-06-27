@@ -1,0 +1,71 @@
+.product {
+	width: 24%;
+	margin-bottom: 20px;
+	background: $gray;
+	border: 1px solid $gray;
+	&:hover {
+		border-color: 1px solid $gray;
+	}
+	&-list {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		margin: 20px;
+	}
+	&-controls {
+		display: flex;
+		button {
+			cursor: pointer;
+			&:disabled {
+				cursor: default;
+			}
+		}
+		
+		button:not(:first-child) {
+			margin-left: 5px;
+		}
+	}
+	&-name {
+		font-size: 22px;
+		font-weight: bold;
+		letter-spacing: 0.3px;
+	}
+	&-label {
+		font-size: 10px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	&-photo {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		&-wrap {
+			width: 100%;
+			height: 200px;
+			background-color: $gray;
+		}
+	}
+
+	&-price {
+		font-family: 'Lato', sans-serif;
+	}
+
+	&-count {
+		font-family: 'Lato', sans-serif;
+	}
+
+	&-top {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px;
+	}
+
+	&-info {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px;
+	}
+	&-selected {
+		background-color: $main;
+	}
+}
