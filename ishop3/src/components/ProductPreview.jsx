@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 class ProductPreview extends React.Component {
 
     render() {
-      const { name, price, count, src, id } = this.props.product;
-      const { editViewModeSwitcher, delHandler } = this.props;
+      const { name, price, count, src } = this.props.product;
       return (
         <React.Fragment>
           <h3 className="preview-title">View Product</h3>
@@ -17,10 +16,6 @@ class ProductPreview extends React.Component {
             <div className="preview-content">
               <div className="preview-top">
                 <h3 className="preview-name">{name}</h3>
-                <div className="preview-controls">
-                  <button onClick={() => delHandler(id)}>Del</button>
-                  <button onClick={editViewModeSwitcher}>Edit</button>
-                </div>
               </div>
               <div className="preview-info">
                 <span className="preview-price"><span className="product-label">price:</span> {price}$</span>

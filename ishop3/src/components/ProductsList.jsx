@@ -36,7 +36,7 @@ class ProductsList extends React.Component {
   delHandler = (id) => {
     if (this.state.isEdit) return;
     if (window.confirm('Are you sure you wish to delete this item?')) {
-      this.setState({products: this.state.products.filter(product => product.id !== id), selectedId: ''});
+      this.setState({products: this.state.products.filter(product => product.id !== id), selectedId: undefined});
     }
   }
 
@@ -86,7 +86,7 @@ class ProductsList extends React.Component {
         {this.state.isEdit &&
           <ProductEdit
             save={this.saveEdited}
-            editViewModeSwitcher={this.editViewModeSwitcher}
+            // editViewModeSwitcher={this.editViewModeSwitcher}
             changedHandler={this.changeHandler}
             isChanged={this.state.isChanged}
             isNew={this.state.isNew}
