@@ -60,6 +60,15 @@ class ProductsList extends React.Component {
   render() {
     const { shopName } = this.props;
     const { products, isChanged } = this.state;
+    let list = products.map(item => (
+      <Product key={item.id}
+                product={item}
+                clickHandler={this.toggleSelected}
+                delHandler={this.delHandler}
+                selectedId={this.state.selectedId}
+                isEdit={this.state.isEdit}
+                isChanged={this.state.isChanged}/>
+    ));
     return (
       <div>
         <div className="header">
@@ -67,15 +76,7 @@ class ProductsList extends React.Component {
           <button className="header-button" disabled={isChanged} onClick={this.addNew}>+ Add new</button>
         </div>
         <div className="product-list">
-          {products.map(item => (
-            <Product key={item.id}
-                      product={item}
-                      clickHandler={this.toggleSelected}
-                      delHandler={this.delHandler}
-                      selectedId={this.state.selectedId}
-                      isEdit={this.state.isEdit}
-                      isChanged={this.state.isChanged}/>
-          ))}
+          {list}
         </div>
         {(!!this.state.selectedId && !this.state.isEdit) &&
           <ProductPreview
@@ -86,11 +87,10 @@ class ProductsList extends React.Component {
         {this.state.isEdit &&
           <ProductEdit
             save={this.saveEdited}
-            // editViewModeSwitcher={this.editViewModeSwitcher}
             changedHandler={this.changeHandler}
             isChanged={this.state.isChanged}
             isNew={this.state.isNew}
-            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : {id: undefined, name: undefined, count: undefined, src: undefined}} />
+            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : {id: 0, name: "", count: 0, src: ""}} />
           }
       </div>
     );

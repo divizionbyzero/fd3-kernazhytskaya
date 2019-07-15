@@ -5,25 +5,43 @@ class Input extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            value: this.props.value
+            value: props.value,
+            isError: false
         };
       }
 
-      editValue = (value) => {
+      editValue = (event) => {
+        console.log(event);
+        const value = event.target.value;
         this.setState({value: value}, () => this.props.changeHandler(this.props.name, this.state.value));
+        // if (value !== '') {
+        //   this.checkIsEmpty(value);
+        // }
+      }
+
+      checkIsEmpty = (e) => {
+        const value = e.target.value;
+        this.setState({isError: value === '' && this.props.isChanged}, () => this.props.cbValidation(this.props.name, this.state.isError));
+        
       }
 
   render() {
-    const { label, type, isChanged } = this.props;
-
+    const { label, type, name } = this.props;
+    const { isError, value } = this.state;
     return (
-        <div className="input-wrap">
+      <div className="input-wrap">
         <div className="input-labels">
             <label className="input-label">{label}</label>
-            {(this.state.value==='' && isChanged) && <span className="input-error">Field must be filled</span>}
+            {isError && <span className="input-error">{name} must be filled</span>}
         </div>
-        <input className="input" type={type} value={this.state.value} onChange={(e) => this.editValue(e.target.value)} />
+        <input className="input"
+          type={type}
+          value={value}
+          onChange={this.editValue}
+          onBlur={this.checkIsEmpty}
+          />
       </div>
     );
   }
