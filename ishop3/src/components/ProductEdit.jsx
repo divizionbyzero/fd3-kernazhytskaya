@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Input from "./Input";
+import Button from "./Button";
+
 
 class ProductPreview extends React.Component {
 
@@ -20,7 +22,7 @@ class ProductPreview extends React.Component {
         countError: false,
         srcError: false
       },
-      isFormValid: false
+      isFormValid: true
     };
   }
 
@@ -37,8 +39,8 @@ class ProductPreview extends React.Component {
   }
 
   render() {
-    const { name, src } = this.props.product;
-    const { save, editViewModeSwitcher, isNew, isChanged } = this.props;
+    const { name, src, price } = this.props.product;
+    const { save, goBack, isNew, isChanged } = this.props;
     const { isFormValid } = this.state;
     return (
       <React.Fragment>
@@ -53,14 +55,14 @@ class ProductPreview extends React.Component {
                 label="Name"
                 name="name"
                 type="text"
-                value={isNew ? undefined : this.state.name} changeHandler={this.editField}
+                value={isNew ? undefined : name} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
                 label="Price"
                 name="price"
                 type="number"
-                value={isNew ? undefined : this.state.price} changeHandler={this.editField}
+                value={isNew ? undefined : price} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
@@ -74,20 +76,20 @@ class ProductPreview extends React.Component {
                 label="URL"
                 name="src"
                 type="text"
-                value={isNew ? undefined : this.state.src} changeHandler={this.editField}
+                value={isNew ? "" : this.state.src} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
                 label="Id (only digits)"
                 name="id"
                 type="number"
-                value={isNew ? undefined : this.state.id} changeHandler={this.editField}
+                value={isNew ? "" : this.state.id} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
             </div>
             <div className="edit-controls">
-              <button disabled={!isFormValid} className="edit-button" onClick={() => save(this.state)}>Save</button>
-              <button className="edit-button" onClick={editViewModeSwitcher}>Back</button>
+              <Button className="edit-button" clickHandler={goBack}>Back</Button>
+              <Button disabled={!isFormValid || !this.state.id} clickHandler={() => save(this.state)} primary>Save</Button>
             </div>
           </div>
         </div>
@@ -102,6 +104,7 @@ ProductPreview.propTypes = {
   changedHandler: PropTypes.func,
   isChanged: PropTypes.bool,
   isNew: PropTypes.bool,
+  goBack: PropTypes.func,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

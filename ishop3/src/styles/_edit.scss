@@ -3,6 +3,13 @@
     display: flex;
 	background: $main;
 	border: 1px solid $main;
+	&-controls {
+		display: flex;
+		height: 30px;
+		button {
+			margin-right: 5px;
+		}
+	}
 	&-photo {
 		object-fit: cover;
 		width: 100%;
@@ -20,28 +27,10 @@
 	}
 	&-button {
 		align-items: flex-start;
-		background-color: rgb(255, 255, 255);
-		border-bottom-color: rgb(186, 186, 186);
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		border-image-outset: 0px;
-		border-image-repeat: stretch;
-		border-image-slice: 100%;
-		border-image-source: none;
-		border-image-width: 1;
-		border-left-color: rgb(209, 209, 209);
-		border-left-style: solid;
-		border-left-width: 1px;
-		border-right-color: rgb(209, 209, 209);
-		border-right-style: solid;
-		border-right-width: 1px;
-		border-top-color: rgb(216, 216, 216);
-		border-top-style: solid;
-		border-top-width: 1px;
 		box-sizing: border-box;
 		padding: 1px 7px;
-		height: 27.5px;
-		margin-right: 5px;
+		height: 30px;
+		margin-left: 5px;
 		cursor: pointer;
 	}
 }

@@ -29,7 +29,18 @@ class ProductsList extends React.Component {
     this.setState({isChanged: true});
   }
 
-  editViewModeSwitcher = () => {    
+  goBack = () => {
+    if (this.state.isChanged) {
+      if (window.confirm('Are you sure to go without saving?')) {
+        this.editViewModeSwitcher();
+      }
+    }
+    else {
+      this.editViewModeSwitcher();
+    }
+  }
+
+  editViewModeSwitcher = () => {
     this.setState({isEdit: !this.state.isEdit, isChanged: false, isNew: false});
   }
 
@@ -41,7 +52,7 @@ class ProductsList extends React.Component {
   }
 
   addNew = () => {
-    this.setState({isEdit: true, selectedId: undefined, isChanged: false, isNew: true, product: {id: undefined, name: undefined, count: undefined, src: undefined}});
+    this.setState({isEdit: true, selectedId: null, isChanged: false, isNew: true, product: {id: null, name: "", count: null, src: "", number: null}});
   }
 
   saveEdited = (obj) => {
@@ -88,9 +99,11 @@ class ProductsList extends React.Component {
           <ProductEdit
             save={this.saveEdited}
             changedHandler={this.changeHandler}
+            editViewModeSwitcher={this.editViewModeSwitcher}
             isChanged={this.state.isChanged}
             isNew={this.state.isNew}
-            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : {id: 0, name: "", count: 0, src: ""}} />
+            goBack={this.goBack}
+            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : {id: null, name: "", count: null, src: "", number: null}} />
           }
       </div>
     );

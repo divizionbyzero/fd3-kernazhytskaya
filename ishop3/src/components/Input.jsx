@@ -13,9 +13,9 @@ class Input extends React.Component {
       }
 
       editValue = (event) => {
-        console.log(event);
         const value = event.target.value;
-        this.setState({value: value}, () => this.props.changeHandler(this.props.name, this.state.value));
+        const {changeHandler, name} = this.props;
+        this.setState({value: value}, () => changeHandler(name, value));
         // if (value !== '') {
         //   this.checkIsEmpty(value);
         // }

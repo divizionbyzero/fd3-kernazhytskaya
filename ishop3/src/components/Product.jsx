@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Button from "./Button";
+
 class Product extends React.Component {
 
   render() {
@@ -15,8 +17,8 @@ class Product extends React.Component {
         <div className="product-top">
           <h3 className="product-name">{name}</h3>
           <div className="product-controls">
-            <button disabled={isChanged && selectedId !== id} onClick={() => delHandler(id)}>Del</button>
-            <button disabled={isChanged && selectedId !== id} onClick={() => clickHandler(id, true)}>Edit</button>
+            <Button disabled={(isChanged && selectedId !== id) || isEdit} clickHandler={() => delHandler(id)}>Del</Button>
+            <Button disabled={isChanged && selectedId !== id} clickHandler={() => clickHandler(id, true)} primary>Edit</Button>
           </div>
         </div>
         <div className="product-info">
