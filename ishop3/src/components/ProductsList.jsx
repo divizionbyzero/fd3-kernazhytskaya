@@ -5,6 +5,8 @@ import Product from "./Product";
 import ProductPreview from "./ProductPreview";
 import ProductEdit from "./ProductEdit";
 
+import Button from "./Button";
+
 class ProductsList extends React.Component {
 
   constructor(props) {
@@ -84,7 +86,7 @@ class ProductsList extends React.Component {
       <div>
         <div className="header">
           <h2 className="header-title">{shopName}</h2>
-          <button className="header-button" disabled={isChanged} onClick={this.addNew}>+ Add new</button>
+          <Button disabled={isChanged} clickHandler={this.addNew} primary>+ Add new</Button>
         </div>
         <div className="product-list">
           {list}

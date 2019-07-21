@@ -55,21 +55,21 @@ class ProductPreview extends React.Component {
                 label="Name"
                 name="name"
                 type="text"
-                value={isNew ? undefined : name} changeHandler={this.editField}
+                value={isNew ? "" : name} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
                 label="Price"
                 name="price"
                 type="number"
-                value={isNew ? undefined : price} changeHandler={this.editField}
+                value={isNew ? "" : price} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
                 label="Count"
                 name="count"
                 type="number"
-                value={isNew ? undefined : this.state.count} changeHandler={this.editField}
+                value={isNew ? "" : this.state.count} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
                 isChanged={isChanged}/>
               <Input
