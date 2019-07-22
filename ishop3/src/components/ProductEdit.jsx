@@ -5,7 +5,7 @@ import Input from "./Input";
 import Button from "./Button";
 
 
-class ProductPreview extends React.Component {
+class ProductEdit extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,15 +35,15 @@ class ProductPreview extends React.Component {
     let errors = this.state.errors;
     errors[fieldName + "Error"] = isError;
     let result = Object.keys(this.state.errors).reduce((sum, next) => sum || this.state.errors[next], false);
-    this.setState({errors, isFormValid: !result});
+    this.setState({ errors, isFormValid: !result });
   }
 
   render() {
-    const { name, src, price } = this.props.product;
+    const { name, src, price, id, count } = this.props.product;
     const { save, goBack, isNew, isChanged } = this.props;
     const { isFormValid } = this.state;
     return (
-      <React.Fragment>
+      <div key={isNew ? -1 : id}>
         <h3 className="preview-title">{isNew ? 'Add Product' : 'Edit Product'}</h3>
         <div className="edit">
           <div className="edit-photo-wrap">
@@ -57,35 +57,35 @@ class ProductPreview extends React.Component {
                 type="text"
                 value={isNew ? "" : name} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
-                isChanged={isChanged}/>
+                isChanged={isChanged} />
               <Input
                 label="Price"
                 name="price"
                 type="number"
                 value={isNew ? "" : price} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
-                isChanged={isChanged}/>
+                isChanged={isChanged} />
               <Input
                 label="Count"
                 name="count"
                 type="number"
-                value={isNew ? "" : this.state.count} changeHandler={this.editField}
+                value={isNew ? "" : count} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
-                isChanged={isChanged}/>
+                isChanged={isChanged} />
               <Input
                 label="URL"
                 name="src"
                 type="text"
-                value={isNew ? "" : this.state.src} changeHandler={this.editField}
+                value={isNew ? "" : src} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
-                isChanged={isChanged}/>
+                isChanged={isChanged} />
               <Input
                 label="Id (only digits)"
                 name="id"
                 type="number"
-                value={isNew ? "" : this.state.id} changeHandler={this.editField}
+                value={isNew ? "" : id} changeHandler={this.editField}
                 cbValidation={this.setValidationInfo}
-                isChanged={isChanged}/>
+                isChanged={isChanged} />
             </div>
             <div className="edit-controls">
               <Button className="edit-button" clickHandler={goBack}>Back</Button>
@@ -93,12 +93,12 @@ class ProductPreview extends React.Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-ProductPreview.propTypes = {
+ProductEdit.propTypes = {
   save: PropTypes.func,
   editViewModeSwitcher: PropTypes.func,
   changedHandler: PropTypes.func,
@@ -114,4 +114,4 @@ ProductPreview.propTypes = {
   })
 }
 
-export default ProductPreview;
+export default ProductEdit;

@@ -11,7 +11,7 @@ class Product extends React.Component {
 
     return (
       <div className={selectedId === id ? "product product-selected" : isEdit && isChanged ? "product semitransparent" : "product"}>
-        <div onClick={() => clickHandler(id)} className="product-photo-wrap">
+        <div onClick={() => clickHandler(id, false)} className="product-photo-wrap">
           <img className={!isEdit ? "product-photo cursor-pointer" : "product-photo"} src={src} alt={name} />
         </div>
         <div className="product-top">

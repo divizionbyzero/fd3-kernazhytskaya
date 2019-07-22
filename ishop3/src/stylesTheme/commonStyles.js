@@ -8,7 +8,8 @@ const styles = {
     },
     disabled: {
       opacity: ".4",
-      border: "none"
+      border: "none",
+      cursor: "default"
     },
     primary: {
         backgroundColor: "#1593C9",

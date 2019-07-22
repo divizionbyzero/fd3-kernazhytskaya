@@ -12,23 +12,22 @@ class ProductsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectedId: undefined,
-        isEdit: false,
-        isChanged: false,
-        isNew: false,
-        products: this.props.products
+      selectedId: undefined,
+      isEdit: false,
+      isChanged: false,
+      isNew: false,
+      products: this.props.products
     };
   }
 
-  toggleSelected = (id, isEdit=false) => {
-    if (this.state.isChanged) return;
+  editSelected = (id, isEdit) => {
     if (this.state.products.find(product => product.id === id)) {
-      this.setState({selectedId: id, isEdit: isEdit});
-  }
+      this.setState({ selectedId: id, isEdit: isEdit, isNew: false });
+    }
   }
 
   changeHandler = () => {
-    this.setState({isChanged: true});
+    this.setState({ isChanged: true });
   }
 
   goBack = () => {
@@ -43,18 +42,18 @@ class ProductsList extends React.Component {
   }
 
   editViewModeSwitcher = () => {
-    this.setState({isEdit: !this.state.isEdit, isChanged: false, isNew: false});
+    this.setState({ isEdit: !this.state.isEdit, isChanged: false, isNew: false });
   }
 
   delHandler = (id) => {
     if (this.state.isEdit) return;
     if (window.confirm('Are you sure you wish to delete this item?')) {
-      this.setState({products: this.state.products.filter(product => product.id !== id), selectedId: undefined});
+      this.setState({ products: this.state.products.filter(product => product.id !== id), selectedId: undefined });
     }
   }
 
   addNew = () => {
-    this.setState({isEdit: true, selectedId: null, isChanged: false, isNew: true, product: {id: null, name: "", count: null, src: "", number: null}});
+    this.setState({ isEdit: true, selectedId: null, isChanged: false, isNew: true, product: { id: null, name: "", count: null, src: "", number: null } });
   }
 
   saveEdited = (obj) => {
@@ -62,10 +61,10 @@ class ProductsList extends React.Component {
     if (indexOfEditedObject > -1) {
       const arrayCopy = this.state.products.slice();
       arrayCopy[indexOfEditedObject] = obj;
-      this.setState({products: arrayCopy, isChanged: false});
+      this.setState({ products: arrayCopy, isChanged: false });
     }
     else {
-      this.setState({products: [...this.state.products, obj], isChanged: false});
+      this.setState({ products: [...this.state.products, obj], isChanged: false });
     }
     this.editViewModeSwitcher();
   }
@@ -75,12 +74,12 @@ class ProductsList extends React.Component {
     const { products, isChanged } = this.state;
     let list = products.map(item => (
       <Product key={item.id}
-                product={item}
-                clickHandler={this.toggleSelected}
-                delHandler={this.delHandler}
-                selectedId={this.state.selectedId}
-                isEdit={this.state.isEdit}
-                isChanged={this.state.isChanged}/>
+        product={item}
+        clickHandler={this.editSelected}
+        delHandler={this.delHandler}
+        selectedId={this.state.selectedId}
+        isEdit={this.state.isEdit}
+        isChanged={this.state.isChanged} />
     ));
     return (
       <div>
@@ -96,7 +95,7 @@ class ProductsList extends React.Component {
             editViewModeSwitcher={this.editViewModeSwitcher}
             delHandler={this.delHandler}
             product={this.state.products.find(product => product.id === this.state.selectedId)} />
-          }
+        }
         {this.state.isEdit &&
           <ProductEdit
             save={this.saveEdited}
@@ -105,8 +104,8 @@ class ProductsList extends React.Component {
             isChanged={this.state.isChanged}
             isNew={this.state.isNew}
             goBack={this.goBack}
-            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : {id: null, name: "", count: null, src: "", number: null}} />
-          }
+            product={this.state.selectedId ? this.state.products.find(product => product.id === this.state.selectedId) : { id: null, name: "", count: null, src: "", number: null }} />
+        }
       </div>
     );
   }
