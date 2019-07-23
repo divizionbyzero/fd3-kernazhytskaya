@@ -26,18 +26,22 @@ class ProductEdit extends React.Component {
     };
   }
 
-
-  componentWillReceiveProps() {
-    this.setState({id: this.props.product.id,
-      name: this.props.product.name,
-      price: this.props.product.price,
-      count: this.props.product.count,
-      src: this.props.product.src});
+  static getDerivedStateFromProps(props, state) {
+    if (!props.isChanged) {
+      return {
+        id: props.product.id,
+        name: props.product.name,
+        price: props.product.price,
+        count: props.product.count,
+        src: props.product.src
+      };
+    }
+    return null;
   }
 
   editField = (fieldName, value) => {
     this.props.changedHandler();
-    this.setState({ [fieldName]: value });
+    this.setState({ [fieldName]: value }, console.log(fieldName, value));
   }
 
   setValidationInfo = (fieldName, isError) => {
