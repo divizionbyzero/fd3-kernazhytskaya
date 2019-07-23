@@ -12,7 +12,7 @@ class ProductsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedId: undefined,
+      selectedId: null,
       isEdit: false,
       isChanged: false,
       isNew: false,
@@ -24,6 +24,7 @@ class ProductsList extends React.Component {
     if (this.state.products.find(product => product.id === id)) {
       this.setState({ selectedId: id, isEdit: isEdit, isNew: false });
     }
+
   }
 
   changeHandler = () => {

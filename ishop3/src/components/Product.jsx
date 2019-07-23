@@ -5,6 +5,11 @@ import Button from "./Button";
 
 class Product extends React.Component {
 
+  componentWillUpdate() {
+    
+  }
+
+
   render() {
     const { name, price, count, src, id } = this.props.product;
     const { delHandler, selectedId, clickHandler, isEdit, isChanged } = this.props;

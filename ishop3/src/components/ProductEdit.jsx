@@ -26,6 +26,15 @@ class ProductEdit extends React.Component {
     };
   }
 
+
+  componentWillReceiveProps() {
+    this.setState({id: this.props.product.id,
+      name: this.props.product.name,
+      price: this.props.product.price,
+      count: this.props.product.count,
+      src: this.props.product.src});
+  }
+
   editField = (fieldName, value) => {
     this.props.changedHandler();
     this.setState({ [fieldName]: value });
@@ -39,7 +48,7 @@ class ProductEdit extends React.Component {
   }
 
   render() {
-    const { name, src, price, id, count } = this.props.product;
+    const { name, src, price, id, count } = this.state;
     const { save, goBack, isNew, isChanged } = this.props;
     const { isFormValid } = this.state;
     return (
